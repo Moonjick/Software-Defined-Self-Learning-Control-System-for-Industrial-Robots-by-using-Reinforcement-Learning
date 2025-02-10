@@ -5,21 +5,15 @@ To create and activate a new Anaconda environment for your project, follow these
 
 ```bash
 # Create a new conda environment named 'ml-agent-env' with Python 3.8
-conda create -n ml-agent-env python=3.8
+conda create -n SDSLCS python=3.8
 
 # Activate the newly created environment
-conda activate ml-agent-env
+conda activate SDSLCS
 
-# Install Unity ML-Agent 0.28.0
-pip install mlagents==0.28.0
+# Install pip list
+pip install -r requirements.txt
 ```
 
-### Important Note
-Ensure that you are using the exact versions of `Numpy` (1.24.0) and `Protobuf` (3.20.0) to avoid compatibility issues with ML-Agent 0.28.0.
-```bash
-pip install numpy==1.24.0
-pip install protobuf==3.20.0
-```
 ### Additional Step
 Install PyTorch compatible with your personal PC GPU:
 
