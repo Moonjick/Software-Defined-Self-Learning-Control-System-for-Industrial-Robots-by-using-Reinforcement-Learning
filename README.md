@@ -14,40 +14,36 @@ conda activate SDSLCS
 pip install -r requirements.txt
 ```
 
-### Additional Step
-Install PyTorch compatible with your personal PC GPU:
+## 2. Connecting to Arduino
+This software communicates with two Arduinos:
 
-Refer to the [PyTorch installation guide](https://pytorch.org/get-started/locally/) and install the appropriate version based on your GPU specifications.
+- Motor_arduino: Controls motor movement.
+- Current_arduino: Reads current sensor data.
 
-
-## 2. Building the Unity Project
-To build your Unity project for training:
-1. Open your Unity project.
-2. Go to **File > Build Settings**.
-3. Add your main scene to the build by clicking **Add Open Scenes**.
-4. Choose **PC, Mac & Linux Standalone** as the platform and set **Windows** as the target (or the appropriate platform).
-5. Click **Build** and choose a directory to save the build (e.g., a folder named `build`).
-6. Wait for the build process to complete.
-
-## 3. Train the Model
-To start training using the ML-Agent with a predefined configuration file and an environment, execute the following command:
+Configure Arduino Ports
+Modify the following lines in the script to match the actual port names on your system:
 
 ```bash
-cd "build path"
-mlagents-learn "yaml file path" --env="build exe file path" --run-id="ID"
+Motor_arduino = serial.Serial("COM3", 115200, timeout=1)  # Change to the correct port
+Current_arduino = serial.Serial("COM4", 9600, timeout=1)   # Change to the correct port
 ```
 
-### Explanation of Command:
-- `--num-envs []`: Utilizes four parallel environments for faster training.
-- `--width [] --height []`: Sets the display resolution of the training environment.
-- `--resume ["Run-id"]`: Resumes training from the last checkpoint if a previous training session with the same --run-id exists.
-- `--time-scale []`: Adjusts the simulation speed, where N is the multiplier for the normal speed (useful for faster training).
-- `--base-port []`: Specifies the starting port number for communication between the training process and environments (useful when running multiple training sessions).
-- `--force`: Overwrites existing training results with the same --run-id if they exist.
-- `--no-graphics`: Runs the environment in a non-graphical mode to save computation resources.
-- `--inference`: Runs the environment in inference mode to test a trained model without updating it.
+Ensure the correct ports are assigned before running the program.
 
-Follow these steps to successfully set up and train your model.
+## 3. Running the Software
+To start the software, simply run the script:
 
-## Acknowledgement
-This work is supported by Institute of information & communications Technology Planning & Evaluation (IITP) grant funded by the Korea government(MSIT) (No.RS-2022-00155911, Artificial Intelligence Convergence Innovation Human) Resources Development(Kyung Hee University)) 
+```bash
+python main.py
+```
+
+The program will:
+- Establish a serial connection with both Arduinos.
+- Send predefined G-code commands to the Motor_arduino.
+- Read and log current sensor data from the Current_arduino.
+- Safely terminate the connection after execution.
+
+## 4. Additional Notes
+- Use Arduino IDE to upload firmware to Motor_arduino and Current_arduino(Program -> arduino IDE) before running the script.
+- Ensure both Arduinos are correctly powered and connected to your system.
+- Adjust the serial ports (COM3, COM4, etc.) based on your system configuration.
