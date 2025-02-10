@@ -47,3 +47,6 @@ The program will:
 - Use Arduino IDE to upload firmware to Motor_arduino and Current_arduino(Program -> arduino IDE) before running the script.
 - Ensure both Arduinos are correctly powered and connected to your system.
 - Adjust the serial ports (COM3, COM4, etc.) based on your system configuration.
+
+## Acknowledgement
+This work is supported by Institute of information & communications Technology Planning & Evaluation (IITP) grant funded by the Korea government(MSIT) (No.RS-2022-00155911, Artificial Intelligence Convergence Innovation Human) Resources Development(Kyung Hee University)
